@@ -2,9 +2,7 @@
 
 TIGRIS_REG_URL="anu-registry.fly.dev"
 R2_REG_URL="r2-registry-production.xe-782.workers.dev"
-IMAGE="xe/x/mimi:latest"
-
-set -euo pipefail
+IMAGE="junk:latest"
 
 skopeo login -u ${TIGRIS_REG_USERNAME} -p ${TIGRIS_REG_PASSWORD} ${TIGRIS_REG_URL} 2>&1 > /dev/null
 skopeo login -u ${R2_REG_USERNAME} -p ${R2_REG_PASSWORD} ${R2_REG_URL} 2>&1 > /dev/null
