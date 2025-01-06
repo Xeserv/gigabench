@@ -11,10 +11,15 @@ skopeo login -u ${R2_REG_USERNAME} -p ${R2_REG_PASSWORD} ${R2_REG_URL} 2>&1 > /d
 
 mkdir -p data/{tigris,r2}
 
-for i in {1..100}; do
+echo '---CUT---'
+echo 'storage provider,region,iter,time'
+
+for i in {1..1024}; do
   tigris_time="$({ time skopeo copy -q docker://${TIGRIS_REG_URL}/${IMAGE} dir:data/tigris; } 2>&1 | head -n2 | tail -n1 | cut -d$'\t' -f2)"
   echo "tigris,${FLY_REGION},${i},${tigris_time}"
 
   r2_time="$({ time skopeo copy -q docker://${R2_REG_URL}/${IMAGE} dir:data/r2; } 2>&1 | head -n2 | tail -n1 | cut -d$'\t' -f2)"
   echo "r2,${FLY_REGION},${i},${r2_time}"
 done
+
+echo '---CUT---'
